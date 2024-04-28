@@ -1,0 +1,93 @@
+<pre>{{ seletor | json }}</pre>
+<div class="container">
+  <form>
+    <div class="card">
+      <div class="card-header text-white bg-primary">
+        <h4>Filtros</h4>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-6 form-group">
+            <label for="nome" class="form-label">Nome:</label>
+            <input type="text" name="nome" id="nome"
+                    class="form-control" [(ngModel)]="seletor.nome">
+          </div>
+          <div class="col-md-6 form-group">
+            <label for="nomePais" class="form-label">País:</label>
+            <select class="form-control" name="nomePais"
+                    [(ngModel)]="seletor.nomePais">
+                 @for (p of paises; track p.id) {
+                  <option value="{{ p.nome }}">{{ p.nome }} ({{ p.sigla }})</option>
+                  }
+            </select>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 form-group">
+              <label for="nomePesquisador" class="form-label">Pesquisador:</label>
+              <select class="form-control" name="nomePesquisador"
+                      [(ngModel)]="seletor.nomePesquisador">
+                  @for (pe of pessoas; track pe.id) {
+                    <option value="{{ pe.nome }}">{{ pe.nome }}</option>
+                  }
+              </select>
+          </div>
+          <div class="col-md-3 form-group">
+              <label for="inicioPesquisa" class="form-label">De:</label>
+              <input type="date" class="form-control" name="inicioPesquisa"
+                      [(ngModel)]="seletor.dataInicioPesquisa">
+          </div>
+          <div class="col-md-3 form-group">
+              <label for="finalPesquisa" class="form-label">Até:</label>
+              <input type="date" class="form-control" name="finalPesquisa"
+                      [(ngModel)]="seletor.dataFinalPesquisa">
+          </div>
+      </div>
+        <div class="row">
+          <div class="col-md-3">
+            <label for="btnLimpar">&nbsp;</label>
+            <button type="button" class="form-control btn btn-warning" name="btnLimpar"
+                    (click)="limpar()">
+                <i class="bi bi-trash"></i> Limpar
+            </button>
+          </div>
+          <div class="col-md-3">
+            <label for="btnPesquisar">&nbsp;</label>
+            <button type="button" class="form-control btn btn-primary" name="btnPesquisar"
+                      (click)="pesquisar()">
+                  <i class="bi bi-search"></i> Pesquisar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+
+  <br><br>
+
+  <div>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Nome</th>
+          <th>País</th>
+          <th>Pesquisador</th>
+          <th>Incio da Pesquisa</th>
+          <th>Estagio</th>
+          <th>Media</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let vacina of vacinas">
+          <td>{{ vacina.nome }}</td>
+          <td>{{ vacina.paisOrigem.nome }}</td>
+          <td>{{ vacina.pesquisadorResponsavel.nome }}</td>
+          <td>{{ vacina.dataInicioPesquisa }}</td>
+          <td>{{ vacina.estagio }}</td>
+          <td>{{ vacina.media }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
