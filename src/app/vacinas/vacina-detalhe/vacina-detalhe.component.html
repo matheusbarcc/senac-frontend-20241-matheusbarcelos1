@@ -1,0 +1,55 @@
+<pre>{{ vacina | json }}</pre>
+<div class="container" >
+  <form>
+    <div class="card">
+      <div class="card-header">
+        <h3>Nova Vacina</h3>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="form-group col-md-12">
+            <label for="nome">Nome:</label>
+            <input type="text" class="form-control" name="nome"
+                [(ngModel)]="vacina.nome" required>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 form-group">
+            <label for="nomePais" class="form-label">País:</label>
+            <select class="form-control" name="nomePais"
+            [(ngModel)]="vacina.paisOrigem">
+            @for (p of paises; track p.id) {
+                  <option value="{{ p.nome }}">{{ p.nome }} ({{ p.sigla }})</option>
+                }
+              </select>
+            </div>
+            <div class="col-md-6 form-group">
+              <label for="nomePesquisador" class="form-label">Pesquisador:</label>
+              <select class="form-control" name="nomePesquisador"
+              [(ngModel)]="vacina.pesquisadorResponsavel">
+              @for (pe of pessoas; track pe.id) {
+                <option value="{{ pe.nome }}">{{ pe.nome }}</option>
+              }
+            </select>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 form-group">
+            <label for="estagio" class="form-label">Estágio:</label>
+            <select type="number" class="form-control" name="estagio"
+                    [(ngModel)]="vacina.estagio">
+                  <option value=1>1 - Inicial</option>
+                  <option value=2>2 - Teste</option>
+                  <option value=3>3 - Aplicação em massa</option>
+            </select>
+          </div>
+          <div class="col-md-6 form-group">
+            <label for="inicioPesquisa" class="form-label">Inicio da pesquisa:</label>
+            <input type="date" class="form-control" name="inicioPesquisa"
+                    [(ngModel)]="vacina.dataInicioPesquisa">
+        </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

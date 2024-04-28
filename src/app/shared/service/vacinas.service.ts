@@ -20,4 +20,8 @@ export class VacinasService {
   listarComSeletor(seletor: VacinaSeletor): Observable<Array<Vacina>> {
     return this.httpClient.post<Array<Vacina>>(this.API + '/filtro', seletor)
   }
+
+  salvar(vacina: Vacina): Observable<Vacina>{
+    return this.httpClient.post<Vacina>(this.API, vacina)
+  }
 }
