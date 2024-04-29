@@ -6,6 +6,8 @@ import { Pais } from '../../shared/model/pais';
 import { PaisService } from '../../shared/service/pais.service';
 import { Pessoa } from '../../shared/model/pessoa';
 import { PessoasService } from '../../shared/service/pessoas.service';
+import Swal from 'sweetalert2';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-vacina-listagem',
@@ -22,7 +24,8 @@ export class VacinaListagemComponent implements OnInit{
 
   constructor(private vacinaService: VacinasService,
               private paisService: PaisService,
-              private pessoaService: PessoasService) { }
+              private pessoaService: PessoasService,
+              private router: Router) { }
 
   ngOnInit(): void {
     this.consultarTodasVacinas()
@@ -70,5 +73,29 @@ export class VacinaListagemComponent implements OnInit{
         console.log('Erro ao consultar vacinas', erro)
       }
     )
+  }
+
+  excluir(vacinaSelecionada: Vacina){
+    Swal.fire({
+      title: 'Deseja realmente excluir essa vacina?',
+      text: 'Essa ação não poderá ser desfeita!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Sim, exlcuir!',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      this.vacinaService.excluir(vacinaSelecionada.id).subscribe(
+        resultado => {
+          this.pesquisar();
+        },
+        erro => {
+          Swal.fire('Erro!', 'Erro ao excluir vacina: ' + erro.error.mensagem, 'error')
+        }
+      );
+    })
+  }
+
+  editar(vacinaSelecionada: Vacina){
+    this.router.navigate(['/vacinas/detalhe/'+ vacinaSelecionada.id])
   }
 }

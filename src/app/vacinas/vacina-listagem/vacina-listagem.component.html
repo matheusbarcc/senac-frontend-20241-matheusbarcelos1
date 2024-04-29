@@ -1,4 +1,3 @@
-<pre>{{ seletor | json }}</pre>
 <div class="container">
   <form>
     <div class="card">
@@ -72,9 +71,9 @@
           <th>Nome</th>
           <th>País</th>
           <th>Pesquisador</th>
-          <th>Incio da Pesquisa</th>
           <th>Estagio</th>
           <th>Media</th>
+          <th>Incio da Pesquisa</th>
         </tr>
       </thead>
       <tbody>
@@ -82,9 +81,20 @@
           <td>{{ vacina.nome }}</td>
           <td>{{ vacina.paisOrigem.nome }}</td>
           <td>{{ vacina.pesquisadorResponsavel.nome }}</td>
-          <td>{{ vacina.dataInicioPesquisa }}</td>
           <td>{{ vacina.estagio }}</td>
           <td>{{ vacina.media }}</td>
+          <td>{{ vacina.dataInicioPesquisa | date: 'dd/MM/yyyy'}}</td>
+          <td class="text-center">
+            <button class="btn btn-xs btn-info mr-12"
+                    (click)="editar(vacina)">
+                  <i class="bi bi-pencil"></i> Editar
+            </button>
+            &nbsp;
+            <button class="btn btn-xs btn-danger"
+                    (click)="excluir(vacina)">
+                <i class="bi bi-x"></i> Excluir
+            </button>
+          </td>
         </tr>
       </tbody>
     </table>

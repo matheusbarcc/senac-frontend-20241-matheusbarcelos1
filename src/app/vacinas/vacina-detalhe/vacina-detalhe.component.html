@@ -1,8 +1,7 @@
-<pre>{{ vacina | json }}</pre>
 <div class="container" >
   <form>
     <div class="card">
-      <div class="card-header">
+      <div class="card-header text-white bg-primary">
         <h3>Nova Vacina</h3>
       </div>
       <div class="card-body">
@@ -16,19 +15,19 @@
         <div class="row">
           <div class="col-md-6 form-group">
             <label for="nomePais" class="form-label">País:</label>
-            <select class="form-control" name="nomePais"
+            <select class="form-control" name="nomePais" [compareWith]="compareById"
             [(ngModel)]="vacina.paisOrigem">
             @for (p of paises; track p.id) {
-                  <option value="{{ p.nome }}">{{ p.nome }} ({{ p.sigla }})</option>
+                  <option [ngValue]="p">{{ p.nome }} ({{ p.sigla }})</option>
                 }
               </select>
             </div>
             <div class="col-md-6 form-group">
               <label for="nomePesquisador" class="form-label">Pesquisador:</label>
-              <select class="form-control" name="nomePesquisador"
+              <select class="form-control" name="nomePesquisador" [compareWith]="compareById"
               [(ngModel)]="vacina.pesquisadorResponsavel">
               @for (pe of pessoas; track pe.id) {
-                <option value="{{ pe.nome }}">{{ pe.nome }}</option>
+                <option [ngValue]="pe">{{ pe.nome }}</option>
               }
             </select>
           </div>
@@ -47,6 +46,20 @@
             <label for="inicioPesquisa" class="form-label">Inicio da pesquisa:</label>
             <input type="date" class="form-control" name="inicioPesquisa"
                     [(ngModel)]="vacina.dataInicioPesquisa">
+        </div>
+        <div class="row">
+          <div class="col-md-6 form-group">
+            <label for="btnVoltar">&nbsp;</label>
+            <button name="btnVoltar" type="submit" class="form-control btn btn-warning" (click)="voltar()">
+              <i class="bi bi-arrow-left"></i> Voltar
+            </button>
+          </div>
+          <div class="col-md-6 form-group">
+            <label for="btnSalvar">&nbsp;</label>
+            <button name="btnSalvar" type="submit" class="form-control btn btn-primary" (click)="salvar()">
+              <i class="bi bi-check"></i> Salvar
+            </button>
+          </div>
         </div>
         </div>
       </div>

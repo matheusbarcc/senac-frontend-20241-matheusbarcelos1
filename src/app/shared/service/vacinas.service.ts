@@ -13,6 +13,22 @@ export class VacinasService {
 
   constructor(private httpClient: HttpClient) { }
 
+  salvar(vacina: Vacina): Observable<Vacina>{
+    return this.httpClient.post<Vacina>(this.API, vacina)
+  }
+
+  atualizar(vacina: Vacina): Observable<Vacina>{
+    return this.httpClient.put<Vacina>(this.API, vacina)
+  }
+
+  excluir(id: number): Observable<any>{
+    return this.httpClient.delete(this.API + '/' + id)
+  }
+
+  consultar(id: number): Observable<Vacina>{
+    return this.httpClient.get<Vacina>(this.API + '/' + id)
+  }
+
   listarTodas(): Observable<Array<Vacina>> {
     return this.httpClient.get<Array<Vacina>>(this.API + '/todas')
   }
@@ -21,7 +37,4 @@ export class VacinasService {
     return this.httpClient.post<Array<Vacina>>(this.API + '/filtro', seletor)
   }
 
-  salvar(vacina: Vacina): Observable<Vacina>{
-    return this.httpClient.post<Vacina>(this.API, vacina)
-  }
 }
