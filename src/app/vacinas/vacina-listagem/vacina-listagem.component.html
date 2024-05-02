@@ -26,7 +26,7 @@
               <label for="nomePesquisador" class="form-label">Pesquisador:</label>
               <select class="form-control" name="nomePesquisador"
                       [(ngModel)]="seletor.nomePesquisador">
-                  @for (pe of pessoas; track pe.id) {
+                  @for (pe of pesquisadores; track pe.id) {
                     <option value="{{ pe.nome }}">{{ pe.nome }}</option>
                   }
               </select>
@@ -43,14 +43,14 @@
           </div>
       </div>
         <div class="row">
-          <div class="col-md-3">
+          <div class="col-md-6">
             <label for="btnLimpar">&nbsp;</label>
             <button type="button" class="form-control btn btn-warning" name="btnLimpar"
                     (click)="limpar()">
                 <i class="bi bi-trash"></i> Limpar
             </button>
           </div>
-          <div class="col-md-3">
+          <div class="col-md-6">
             <label for="btnPesquisar">&nbsp;</label>
             <button type="button" class="form-control btn btn-primary" name="btnPesquisar"
                       (click)="pesquisar()">
@@ -85,7 +85,7 @@
           <td>{{ vacina.media }}</td>
           <td>{{ vacina.dataInicioPesquisa | date: 'dd/MM/yyyy'}}</td>
           <td class="text-center">
-            <button class="btn btn-xs btn-info mr-12"
+            <button class="btn btn-xs btn-info mr-12 text-white"
                     (click)="editar(vacina)">
                   <i class="bi bi-pencil"></i> Editar
             </button>

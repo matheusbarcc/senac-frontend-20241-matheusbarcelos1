@@ -15,4 +15,8 @@ export class PessoasService {
   public consultarTodos(): Observable<Array<Pessoa>>{
     return this.httpClient.get<Array<Pessoa>>(this.API + '/todas')
   }
+
+  public consultarPesquisadores(): Observable<Array<Pessoa>>{
+    return this.httpClient.get<Array<Pessoa>>(this.API + '/pesquisadores')
+  }
 }

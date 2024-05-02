@@ -20,7 +20,7 @@ export class VacinaListagemComponent implements OnInit{
   public seletor: VacinaSeletor = new VacinaSeletor()
 
   public paises: Array<Pais> = new Array()
-  public pessoas: Array<Pessoa> = new Array()
+  public pesquisadores: Array<Pessoa> = new Array()
 
   constructor(private vacinaService: VacinasService,
               private paisService: PaisService,
@@ -39,9 +39,9 @@ export class VacinaListagemComponent implements OnInit{
       }
     )
 
-    this.pessoaService.consultarTodos().subscribe(
+    this.pessoaService.consultarPesquisadores().subscribe(
       resultado => {
-        this.pessoas = resultado;
+        this.pesquisadores = resultado;
       },
       erro => {
         console.log('Erro ao buscar pessoas' + erro)
@@ -84,14 +84,16 @@ export class VacinaListagemComponent implements OnInit{
       confirmButtonText: 'Sim, exlcuir!',
       cancelButtonText: 'Cancelar'
     }).then((result) => {
-      this.vacinaService.excluir(vacinaSelecionada.id).subscribe(
-        resultado => {
-          this.pesquisar();
-        },
-        erro => {
-          Swal.fire('Erro!', 'Erro ao excluir vacina: ' + erro.error.mensagem, 'error')
-        }
-      );
+      if(result.isConfirmed){
+        this.vacinaService.excluir(vacinaSelecionada.id).subscribe(
+          resultado => {
+            this.pesquisar();
+          },
+          erro => {
+            Swal.fire('Erro!', 'Erro ao excluir vacina: ' + erro.error.mensagem, 'error')
+          }
+        );
+      }
     })
   }
 

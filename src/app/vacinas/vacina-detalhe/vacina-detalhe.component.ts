@@ -19,7 +19,7 @@ export class VacinaDetalheComponent implements OnInit{
   public vacina: Vacina = new Vacina();
   public pais: Pais = new Pais()
   public paises: Array<Pais> = new Array()
-  public pessoas: Array<Pessoa> = new Array()
+  public pesquisadores: Array<Pessoa> = new Array()
   public idVacina: number
 
   constructor(private vacinaService: VacinasService,
@@ -45,9 +45,9 @@ export class VacinaDetalheComponent implements OnInit{
       }
     )
 
-    this.pessoaService.consultarTodos().subscribe(
+    this.pessoaService.consultarPesquisadores().subscribe(
       resultado => {
-        this.pessoas = resultado;
+        this.pesquisadores = resultado;
       },
       erro => {
         console.log('Erro ao buscar pessoas' + erro)
