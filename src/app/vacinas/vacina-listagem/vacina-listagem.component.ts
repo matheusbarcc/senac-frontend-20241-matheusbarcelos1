@@ -18,9 +18,9 @@ export class VacinaListagemComponent implements OnInit{
 
   public vacinas: Vacina[] = []
   public seletor: VacinaSeletor = new VacinaSeletor()
-
   public paises: Array<Pais> = new Array()
   public pesquisadores: Array<Pessoa> = new Array()
+  public totalPaginas: number;
 
   constructor(private vacinaService: VacinasService,
               private paisService: PaisService,
@@ -28,7 +28,8 @@ export class VacinaListagemComponent implements OnInit{
               private router: Router) { }
 
   ngOnInit(): void {
-    this.consultarTodasVacinas()
+    this.pesquisar();
+    this.contarPaginas();
 
     this.paisService.consultarTodos().subscribe(
       resultado => {
@@ -67,10 +68,10 @@ export class VacinaListagemComponent implements OnInit{
   private consultarTodasVacinas(){
     this.vacinaService.listarTodas().subscribe(
       resultado => {
-        this.vacinas = resultado
+        this.vacinas = resultado;
       },
       erro => {
-        console.log('Erro ao consultar vacinas', erro)
+        console.log('Erro ao consultar vacinas', erro);
       }
     )
   }
@@ -99,5 +100,25 @@ export class VacinaListagemComponent implements OnInit{
 
   editar(vacinaSelecionada: Vacina){
     this.router.navigate(['/vacinas/detalhe/'+ vacinaSelecionada.id])
+  }
+
+  contarPaginas() {
+    this.vacinaService.contarPaginas(this.seletor).subscribe(
+      (count: number) => {
+        this.totalPaginas = count;
+      },
+      (error) => {
+        console.error('Erro ao obter o valor do contador:', error);
+      }
+    );
+  }
+  proximaPg(){
+    this.seletor.pagina++;
+    this.pesquisar();
+  }
+
+  voltarPg(){
+    this.seletor.pagina--;
+    this.pesquisar();
   }
 }
