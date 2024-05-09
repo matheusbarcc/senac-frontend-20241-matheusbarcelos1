@@ -20,7 +20,9 @@ export class VacinaListagemComponent implements OnInit{
   public seletor: VacinaSeletor = new VacinaSeletor()
   public paises: Array<Pais> = new Array()
   public pesquisadores: Array<Pessoa> = new Array()
-  public totalPaginas: number;
+  public totalPaginas: number
+  public totalItens: number
+  public offset: number
 
   constructor(private vacinaService: VacinasService,
               private paisService: PaisService,
@@ -28,8 +30,7 @@ export class VacinaListagemComponent implements OnInit{
               private router: Router) { }
 
   ngOnInit(): void {
-    this.pesquisar();
-    this.contarPaginas();
+    this.pesquisar()
 
     this.paisService.consultarTodos().subscribe(
       resultado => {
@@ -42,7 +43,7 @@ export class VacinaListagemComponent implements OnInit{
 
     this.pessoaService.consultarPesquisadores().subscribe(
       resultado => {
-        this.pesquisadores = resultado;
+        this.pesquisadores = resultado
       },
       erro => {
         console.log('Erro ao buscar pessoas' + erro)
@@ -54,11 +55,14 @@ export class VacinaListagemComponent implements OnInit{
     this.vacinaService.listarComSeletor(this.seletor).subscribe(
       resultado => {
         this.vacinas = resultado
+        this.contarItens()
       },
       erro => {
         console.log('Erro ao consultar vacinas com seletor', erro)
       }
     )
+
+    this.contarPaginas();
   }
 
   public limpar(){
@@ -108,7 +112,7 @@ export class VacinaListagemComponent implements OnInit{
         this.totalPaginas = count;
       },
       (error) => {
-        console.error('Erro ao obter o valor do contador:', error);
+        console.error('Erro ao obter o valor do contador de paginas:', error);
       }
     );
   }
@@ -120,5 +124,20 @@ export class VacinaListagemComponent implements OnInit{
   voltarPg(){
     this.seletor.pagina--;
     this.pesquisar();
+  }
+
+  contarItens(){
+    this.vacinaService.contarItens(this.seletor).subscribe(
+      (count: number) => {
+        this.totalItens = count
+      },
+      (error) =>{
+        console.error('Erro ao obter valor do contador de itens:', error)
+      }
+    )
+  }
+
+  getOffset(){
+    this.offset = this.seletor.limite * (this.seletor.pagina - 1)
   }
 }

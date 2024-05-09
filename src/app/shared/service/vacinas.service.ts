@@ -37,7 +37,7 @@ export class VacinasService {
     return this.httpClient.post<Array<Vacina>>(this.API + '/filtro', seletor);
   }
 
-  count(seletor: VacinaSeletor): Observable<number>{
+  contarItens(seletor: VacinaSeletor): Observable<number>{
     return this.httpClient.post<number>(this.API + '/count', seletor);
   }
 
