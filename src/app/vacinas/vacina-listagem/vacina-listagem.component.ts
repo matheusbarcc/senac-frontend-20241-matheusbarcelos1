@@ -86,7 +86,7 @@ export class VacinaListagemComponent implements OnInit{
       text: 'Essa ação não poderá ser desfeita!',
       icon: 'warning',
       showCancelButton: true,
-      confirmButtonText: 'Sim, exlcuir!',
+      confirmButtonText: 'Sim, excluir!',
       cancelButtonText: 'Cancelar'
     }).then((result) => {
       if(result.isConfirmed){

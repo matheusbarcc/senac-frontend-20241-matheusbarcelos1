@@ -84,12 +84,12 @@
     <table class="table table-striped">
       <thead>
         <tr>
-          <th>Nome</th>
-          <th>País</th>
-          <th>Pesquisador</th>
-          <th>Estagio</th>
-          <th>Media</th>
-          <th>Incio da Pesquisa</th>
+          <th style="width: 200px;">Nome</th>
+          <th style="width: 200px;">País</th>
+          <th style="width: 200px;">Pesquisador</th>
+          <th style="width: 120px;">Estágio</th>
+          <th style="width: 120px;">Média</th>
+          <th style="width: 220px;">Início da Pesquisa</th>
         </tr>
       </thead>
       <tbody>
@@ -100,7 +100,7 @@
           <td>{{ vacina.estagio }}</td>
           <td>{{ vacina.media }}</td>
           <td>{{ vacina.dataInicioPesquisa | date: 'dd/MM/yyyy'}}</td>
-          <td class="text-center">
+          <td  class="text-center">
             <button class="btn btn-xs btn-info mr-12 text-white"
                     (click)="editar(vacina)">
                   <i class="bi bi-pencil"></i> Editar
@@ -114,6 +114,7 @@
         </tr>
       </tbody>
     </table>
+
   </div>
 </div>
 

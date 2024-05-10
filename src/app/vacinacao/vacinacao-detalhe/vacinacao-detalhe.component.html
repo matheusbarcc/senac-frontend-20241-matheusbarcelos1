@@ -1,0 +1,64 @@
+<pre>{{ vacinacao | json}}</pre>
+<div class="container" >
+  <form>
+    <div class="card">
+      <div class="card-header text-white bg-primary">
+        <h3>Nova Vacinação</h3>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-6 form-group">
+            <label for="nomeVacina" class="form-label">Vacina:</label>
+            <select class="form-control" name="nomeVacina" [compareWith]="compareById"
+            [(ngModel)]="vacinacao.vacina">
+            @for (v of vacinas; track v.id) {
+                  <option [ngValue]="v">{{ v.nome }}</option>
+                }
+              </select>
+            </div>
+            <div class="col-md-6 form-group">
+              <label for="pessoa" class="form-label">Pessoa:</label>
+              <select class="form-control" name="pessoa" [compareWith]="compareById"
+              [(ngModel)]="vacinacao.idPessoa">
+              @for (pe of pessoas; track pe.id) {
+                <option [ngValue]="pe.id">{{ pe.nome }}</option>
+              }
+            </select>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 form-group">
+            <label for="avaliacao" class="form-label">Avaliação:</label>
+            <select type="number" class="form-control" name="estagio"
+                    [(ngModel)]="vacinacao.avaliacao">
+                  <option value=1>1</option>
+                  <option value=2>2</option>
+                  <option value=3>3</option>
+                  <option value=4>4</option>
+                  <option value=5>5</option>
+            </select>
+          </div>
+          <div class="col-md-6 form-group">
+            <label for="dataAplicacao" class="form-label">Data da aplicação:</label>
+            <input type="date" class="form-control" name="dataAplicacao"
+                    [(ngModel)]="vacinacao.dataAplicacao">
+        </div>
+        <div class="row">
+          <div class="col-md-6 form-group">
+            <label for="btnVoltar">&nbsp;</label>
+            <button name="btnVoltar" type="submit" class="form-control btn btn-warning" (click)="voltar()">
+              <i class="bi bi-arrow-left"></i> Voltar
+            </button>
+          </div>
+          <div class="col-md-6 form-group">
+            <label for="btnSalvar">&nbsp;</label>
+            <button name="btnSalvar" type="submit" class="form-control btn btn-primary" (click)="salvar()">
+              <i class="bi bi-check"></i> Salvar
+            </button>
+          </div>
+        </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
