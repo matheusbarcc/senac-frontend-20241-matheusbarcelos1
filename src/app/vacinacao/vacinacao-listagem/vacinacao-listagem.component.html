@@ -1,1 +1,121 @@
-<p>vacinacao-listagem works!</p>
+<div class="container">
+  <form>
+    <div class="card">
+      <div class="card-header text-white bg-primary">
+        <h4>Filtros</h4>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-6 form-group">
+            <label for="nomePessoa" class="form-label">Pessoa:</label>
+            <select class="form-control" name="nomePessoa"
+                    [(ngModel)]="seletor.nomePessoa">
+                 @for (p of pessoas; track p.id) {
+                  <option value="{{ p.nome }}">{{ p.nome }}</option>
+                  }
+            </select>
+          </div>
+          <div class="col-md-6 form-group">
+            <label for="nomeVacina" class="form-label">Vacina:</label>
+            <select class="form-control" name="nomeVacina"
+                    [(ngModel)]="seletor.nomeVacina">
+                 @for (v of vacinas; track v.id) {
+                  <option value="{{ v.nome }}">{{ v.nome }}</option>
+                  }
+            </select>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 form-group">
+              <label for="avaliacao" class="form-label">Avaliação:</label>
+              <select class="form-control" name="avaliacao" [(ngModel)]="seletor.avaliacao">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+              </select>
+          </div>
+          <div class="col-md-3 form-group">
+              <label for="aplicacaoInicio" class="form-label">De:</label>
+              <input type="date" class="form-control" name="aplicacaoInicio"
+                      [(ngModel)]="seletor.dataAplicacaoInicio">
+          </div>
+          <div class="col-md-3 form-group">
+              <label for="aplicacaoFinal" class="form-label">Até:</label>
+              <input type="date" class="form-control" name="aplicacaoFinal"
+                      [(ngModel)]="seletor.dataAplicacaoFinal">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <label for="btnLimpar">&nbsp;</label>
+            <button type="button" class="form-control btn btn-warning" name="btnLimpar"
+            (click)="limpar()">
+            <i class="bi bi-trash"></i> Limpar
+          </button>
+        </div>
+          <div class="col-md-6">
+            <label for="btnPesquisar">&nbsp;</label>
+            <button type="button" class="form-control btn btn-primary" name="btnPesquisar"
+            (click)="pesquisar()">
+            <i class="bi bi-search"></i> Pesquisar
+          </button>
+        </div>
+      </div>
+      </div>
+    </div>
+  </form>
+
+  <br>
+  <!-- <div>
+      <label for="limitePg" style="margin-right: 10px;">Itens por página: </label>
+        <select class="rounded" name="limitePg" [(ngModel)]="seletor.limite" (change)="pesquisar()" style="padding: 10px;">
+          <option value="2">2</option>
+          <option value="5">5</option>
+          <option value="10">10</option>
+          <option value="20">20</option>
+          <option value="40">40</option>
+          <option value="80">80</option>
+        </select>
+      <span style="padding: 0px 50px;">{{(seletor.limite * (seletor.pagina - 1)) + 1}} - {{seletor.limite * seletor.pagina}} de {{ totalItens }}</span>
+      <button class="btn" (click)="voltarPg()" [disabled]="seletor.pagina == 1" id="btnPaginacao" id="navPaginacao"><i class="bi bi-caret-left"></i></button>
+      <button class="btn" (click)="proximaPg()" [disabled]="seletor.pagina == totalPaginas" id="btnPaginacao" id="navPaginacao"><i class="bi bi-caret-right"></i></button>
+  </div> -->
+
+  <br>
+
+  <div>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th style="width: 200px;">Pessoa</th>
+          <th style="width: 200px;">Vacina</th>
+          <th style="width: 200px;">Avaliação</th>
+          <th style="width: 120px;">Data da aplicação</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let v of vacinacoes">
+          <td>{{ v.pessoa.nome}}</td>
+          <td>{{ v.vacina.nome }}</td>
+          <td>{{ v.avaliacao }}</td>
+          <td>{{ v.dataAplicacao | date: 'dd/MM/yyyy'}}</td>
+          <!-- <td  class="text-center">
+            <button class="btn btn-xs btn-info mr-12 text-white"
+                    (click)="editar(vacina)">
+                  <i class="bi bi-pencil"></i> Editar
+            </button>
+            &nbsp;
+            <button class="btn btn-xs btn-danger"
+                    (click)="excluir(vacina)">
+                <i class="bi bi-x"></i> Excluir
+            </button>
+          </td> -->
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+

@@ -1,3 +1,4 @@
+import { Pessoa } from "./pessoa"
 import { Vacina } from "./vacina"
 
 export class Vacinacao{
@@ -6,4 +7,5 @@ export class Vacinacao{
   vacina: Vacina
   dataAplicacao: Date
   avaliacao: number
+  pessoa: Pessoa
 }
