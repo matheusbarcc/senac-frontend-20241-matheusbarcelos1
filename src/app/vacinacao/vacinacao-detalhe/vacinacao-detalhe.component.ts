@@ -18,7 +18,6 @@ export class VacinacaoDetalheComponent implements OnInit{
   public vacinas: Array<Vacina> = new Array()
   public pessoas: Array<Pessoa> = new Array()
   public vacinacao: Vacinacao = new Vacinacao()
-compareById: (o1: any,o2: any) => boolean;
 
   constructor(private vacinacaoService: VacinacaoService,
               private vacinaService: VacinasService,
@@ -69,5 +68,9 @@ compareById: (o1: any,o2: any) => boolean;
 
   voltar(): void {
     this.router.navigate([''])
+  }
+
+  public compareById(r1: any, r2: any): boolean {
+    return r1 && r2 ? r1.id === r2.id : r1 === r2
   }
 }
