@@ -10,5 +10,10 @@ export const routes: Routes = [
     path: 'vacinacao',
     loadChildren: () =>
       import('./vacinacao/vacinacao.module').then((m) => m.VacinacaoModule),
-  }
+  },
+  {
+    path: '',
+    loadChildren: () =>
+      import('./homepage/homepage.module').then((m) => m.HomepageModule),
+  },
 ];
