@@ -19,4 +19,8 @@ export class PessoasService {
   public consultarPesquisadores(): Observable<Array<Pessoa>>{
     return this.httpClient.get<Array<Pessoa>>(this.API + '/pesquisadores')
   }
+
+  public salvar(pessoa: Pessoa): Observable<Pessoa>{
+    return this.httpClient.post<Pessoa>(this.API, pessoa)
+  }
 }

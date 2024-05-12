@@ -16,4 +16,9 @@ export const routes: Routes = [
     loadChildren: () =>
       import('./homepage/homepage.module').then((m) => m.HomepageModule),
   },
+  {
+    path: 'pessoa',
+    loadChildren: () =>
+      import('./pessoa/pessoa.module').then((m) => m.PessoaModule),
+  },
 ];
