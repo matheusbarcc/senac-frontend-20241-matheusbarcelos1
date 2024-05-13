@@ -1,0 +1,82 @@
+<div class="container">
+  <form>
+    <div class="card">
+      <div class="card-header text-white bg-primary">
+        <h4>Filtros</h4>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-6 form-group">
+            <label for="nomeMarca" class="form-label">Nome da marca:</label>
+            <select class="form-control" name="nomeMarca"
+                    [(ngModel)]="seletor.nomeMarca">
+                 @for (m of montadoras; track m.id) {
+                  <option value="{{ m.nome }}">{{ m.nome }}</option>
+                }
+            </select>
+          </div>
+          <div class="col-md-6 form-group">
+            <label for="modelo" class="form-label">Modelo:</label>
+            <input type="text" name="modelo" id="modelo"
+                    class="form-control" [(ngModel)]="seletor.modelo">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 form-group">
+              <label for="anoInicial" class="form-label">Ano inicial:</label>
+              <input type="date" class="form-control" name="anoInicial"
+                      [(ngModel)]="seletor.anoInicial">
+          </div>
+          <div class="col-md-6 form-group">
+              <label for="anoFinal" class="form-label">Ano final:</label>
+              <input type="date" class="form-control" name="anoFinal"
+                      [(ngModel)]="seletor.anoFinal">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <label for="btnLimpar">&nbsp;</label>
+            <button type="button" class="form-control btn btn-warning" name="btnLimpar"
+            (click)="limpar()">
+            <i class="bi bi-trash"></i> Limpar
+          </button>
+        </div>
+          <div class="col-md-6">
+            <label for="btnPesquisar">&nbsp;</label>
+            <button type="button" class="form-control btn btn-primary" name="btnPesquisar"
+            (click)="pesquisar()">
+            <i class="bi bi-search"></i> Pesquisar
+          </button>
+        </div>
+      </div>
+      </div>
+    </div>
+  </form>
+
+  <br>
+  <br>
+
+  <div>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Placa</th>
+          <th>Modelo</th>
+          <th>Montadora</th>
+          <th>Ano</th>
+          <th>Valor</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let carro of carros">
+          <td>{{ carro.placa }}</td>
+          <td>{{ carro.modelo }}</td>
+          <td>{{ carro.montadora.nome }}</td>
+          <td>{{ carro.ano  | date: 'dd/MM/yyyy'}}</td>
+          <td>R$: {{ carro.valor }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+

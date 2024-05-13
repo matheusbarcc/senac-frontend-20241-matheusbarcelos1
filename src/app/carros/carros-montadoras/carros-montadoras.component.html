@@ -1,0 +1,32 @@
+<div class="container">
+  <form>
+    <div class="card">
+      <div class="card-header text-white bg-primary">
+        <h4>Estoque</h4>
+      </div>
+      <div class="card-body">
+        <div class="row justify-content-center">
+          <div class="col-md-6 form-group">
+              <label for="montadora" class="form-label">Selecione uma montadora:</label>
+              <select class="form-control" name="montadora"
+                      [(ngModel)]="montadora.id">
+                  @for (m of montadoras; track m.id) {
+                    <option value="{{ m.id }}">{{ m.nome }} ({{ m.paisFundacao }})</option>
+                  }
+              </select>
+          </div>
+        </div>
+        <div class="row justify-content-center">
+          <div class="col-md-6">
+            <label for="btnPesquisar">&nbsp;</label>
+            <button type="button" class="form-control btn btn-primary" name="btnPesquisar"
+            (click)="consultarEstoqueCarros(montadora.id)">
+            <i class="bi bi-search"></i> Consultar estoque
+          </button>
+        </div>
+      </div>
+      </div>
+    </div>
+  </form>
+</div>
+
