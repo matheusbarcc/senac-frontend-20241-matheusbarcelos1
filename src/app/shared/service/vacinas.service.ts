@@ -9,7 +9,7 @@ import { VacinaSeletor } from '../model/seletor/vacina.seletor';
 })
 export class VacinasService {
 
-  private readonly API = 'http://localhost:8080/senac-backend-20241-matheusbarcelos/rest/vacina';
+  private API = 'http://localhost:8080/senac-backend-20241-matheusbarcelos/rest/vacina';
 
   constructor(private httpClient: HttpClient) { }
 
